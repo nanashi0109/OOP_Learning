@@ -34,6 +34,8 @@ class Book:
         print(f"Author: {self.author}")
         print(f"Count page: {self.count_page}")
 
+
+#Task 3
 class PassengerPlane:
     def __init__(self, maker: str, model: str, passenger_capacity: int, current_height: int, current_velocity: int):
         self.maker = maker
@@ -67,18 +69,29 @@ class PassengerPlane:
         print(f"Current height: {self.current_height}")
         print(f"Current velocity: {self.current_velocity}")
 
+
+#Task 4
 class MusicAlbum:
-    def __init__(self):
-        pass
+    def __init__(self, artist: str, album_name: str, genre: str, track_list: []):
+        self.artist = artist
+        self.album_name = album_name
+        self.genre = genre
+        self.track_list = track_list
 
-    def add_song_in_album(self):
-        pass
+    def add_song_in_album(self, track_name: str):
+        self.track_list.append(track_name)
 
-    def remove_song_in_album(self):
-        pass
+    def remove_song_in_album(self, track_name: str):
+        self.track_list.remove(track_name)
 
-    def play_song_in_album(self):
-        pass
+    def play_song_in_album(self, track_name: str):
+        if self.track_list.Count(track_name) > 0:
+            print(f"Play {track_name}")
+        else:
+            print(f"ERROR! Track {track_name} doesn't find!")
 
     def print_data(self):
-        pass
+        print(f"Artist: {self.artist}")
+        print(f"Album: {self.album_name}")
+        print(f"Genre: {self.genre}")
+        print(f"Track list: {self.track_list}")
