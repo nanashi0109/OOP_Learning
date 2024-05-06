@@ -66,3 +66,19 @@ class PassengerPlane:
         print(f"Max count passenger: {self.passenger_capacity}")
         print(f"Current height: {self.current_height}")
         print(f"Current velocity: {self.current_velocity}")
+
+class MusicAlbum:
+    def __init__(self):
+        pass
+
+    def add_song_in_album(self):
+        pass
+
+    def remove_song_in_album(self):
+        pass
+
+    def play_song_in_album(self):
+        pass
+
+    def print_data(self):
+        pass
