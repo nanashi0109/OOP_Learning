@@ -33,3 +33,18 @@ class Book:
         print(f"Name: {self.name}")
         print(f"Author: {self.author}")
         print(f"Count page: {self.count_page}")
+
+class PassengerPlane:
+    def __init__(self):
+        pass
+
+    def take_off_plane(self):
+        pass
+    def landing_plane(self):
+        pass
+    def change_height(self):
+        pass
+    def change_velocity(self):
+        pass
+    def print_data(self):
+        pass
