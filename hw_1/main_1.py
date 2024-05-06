@@ -35,16 +35,34 @@ class Book:
         print(f"Count page: {self.count_page}")
 
 class PassengerPlane:
-    def __init__(self):
-        pass
+    def __init__(self, maker: str, model: str, passenger_capacity: int, current_height: int, current_velocity: int):
+        self.maker = maker
+        self.model = model
+        self.passenger_capacity = passenger_capacity
+        self.current_height = current_height
+        self.current_velocity = current_velocity
 
     def take_off_plane(self):
-        pass
+        print("Take off plane")
+
     def landing_plane(self):
-        pass
-    def change_height(self):
-        pass
-    def change_velocity(self):
-        pass
+        print("Landing plane")
+
+    def change_height(self, new_height: int):
+        if new_height < 0:
+            print("ERROR! You can`t be so low")
+        else:
+            self.current_height = new_height
+
+    def change_velocity(self, new_velocity: int):
+        if new_velocity < 0:
+            print("ERROR! You can`t have negative velocity")
+        else:
+            self.current_velocity = new_velocity
+
     def print_data(self):
-        pass
+        print(f"Maker: {self.maker}")
+        print(f"Model: {self.model}")
+        print(f"Max count passenger: {self.passenger_capacity}")
+        print(f"Current height: {self.current_height}")
+        print(f"Current velocity: {self.current_velocity}")
