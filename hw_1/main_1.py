@@ -1,3 +1,4 @@
+#Task 1
 class Animal:
     def __init__(self, name: str, age: int, sound: str):
         self.name = name
@@ -11,3 +12,13 @@ class Animal:
         print(f"Animal's name: {self.name}")
         print(f"Animal's age: {self.age}")
         print(f"Animal's sound: {self.sound}")
+
+#Task 2
+class Book:
+    def __init__(self):
+        pass
+    def open_page(self):
+        pass
+
+    def print_date(self):
+        pass
