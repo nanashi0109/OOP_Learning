@@ -13,12 +13,23 @@ class Animal:
         print(f"Animal's age: {self.age}")
         print(f"Animal's sound: {self.sound}")
 
+
 #Task 2
 class Book:
-    def __init__(self):
-        pass
-    def open_page(self):
-        pass
+    def __init__(self, name: str, author: str, count_page: int):
+        self.name = name
+        self.author = author
+        self.count_page = count_page
+
+    def open_page(self, page: int):
+        if page > self.count_page:
+            print("ERROR! Count page is so large!")
+        elif page <0:
+            print("ERROR! Page is so small!")
+        else:
+            print(f"Opening page: {page}")
 
     def print_date(self):
-        pass
+        print(f"Name: {self.name}")
+        print(f"Author: {self.author}")
+        print(f"Count page: {self.count_page}")
