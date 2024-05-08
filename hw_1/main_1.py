@@ -79,14 +79,12 @@ class MusicAlbum:
         self.track_list = track_list
 
     def add_songs_in_album(self, tracks_names: str):
-        for k in range(0, len(tracks_names)):
-            self.track_list.append(tracks_names[k])
-            print(f"In album adding: {tracks_names[k]}")
+        self.track_list.append(tracks_names)
+        print(f"In album adding: {tracks_names}")
 
     def remove_song_in_album(self, tracks_names: str):
-        for k in range(0, len(tracks_names)):
-            self.track_list.remove(tracks_names[k])
-            print(f"In album remove: {tracks_names[k]}")
+        self.track_list.remove(tracks_names)
+        print(f"In album remove: {tracks_names}")
 
     def play_song_in_album(self, track_name: str):
         if self.track_list.count(track_name) > 0:
