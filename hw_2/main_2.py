@@ -3,7 +3,6 @@ from datetime import date, time
 
 # Task 1
 class Patient:
-
     def __init__(self, first_name: str, second_name: str, last_name: str, age: int, current_illness: str):
         self.first_name = first_name
         self.second_name = second_name
@@ -20,7 +19,6 @@ class Patient:
 
 # Task 2
 class TouristSpot:
-
     def __init__(self, name_place: str, country: str, type_landmark: str):
         self.name_place = name_place
         self.country = country
@@ -33,8 +31,78 @@ class TouristSpot:
         return f"{self.name_place} \n{self.country} \n{self.type}"
 
 
-class Program:
+# Task 4
+class ArrayUtils:
+    @staticmethod
+    def sum(array: []):
+        result = 0
+        for i in range(0, len(array)-1, 1):
+            if array[i].isdigid():
+                result += int(array[i])
+            else:
+                print(f"{array[i]} is not digid")
+                return
 
+        return result
+
+    @staticmethod
+    def multy(array: []):
+        result = 1
+        for i in range(0, len(array)-1, 1):
+            if array[i].isdigid():
+                result *= int(array[i])
+            else:
+                print(f"{array[i]} is not digid")
+                return
+
+        return result
+
+    @staticmethod
+    def inversion(array: []):
+        result = []
+        for i in range(len(array)-1, 0, -1):
+            result.append(array[i])
+
+        return result
+
+    @staticmethod
+    def max_number(array: []):
+        if array[0].isdigid:
+            result = array[0]
+        else:
+            print(f"{array[0]} is not digid")
+            return
+
+        for i in range(0, len(array)-1, 1):
+            if array[i].isdigid():
+                if array[i] > result:
+                    result = array[i]
+            else:
+                print(f"{array[i]} is not digid")
+                return
+
+        return result
+
+    @staticmethod
+    def min_number(array: []):
+        if array[0].isdigid:
+            result = array[0]
+        else:
+            print(f"{array[0]} is not digid")
+            return
+
+        for i in range(0, len(array) - 1, 1):
+            if array[i].isdigid():
+                if array[i] < result:
+                    result = array[i]
+            else:
+                print(f"{array[i]} is not digid")
+                return
+
+        return result
+
+
+class Program:
     @staticmethod
     def main():
         print("\n---Task_1---")
@@ -45,6 +113,7 @@ class Program:
         print("\n---Task_2---")
         tourist_spot = TouristSpot("State of Liberty", "New York", "historical")
         tourist_spot.visit_landmark(patient.first_name + " " + patient.last_name)
+        print(tourist_spot)
 
 
 Program.main()
