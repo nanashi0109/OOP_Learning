@@ -78,12 +78,12 @@ class MusicAlbum:
         self.genre = genre
         self.track_list = track_list
 
-    def add_songs_in_album(self, tracks_names: []):
+    def add_songs_in_album(self, tracks_names: str):
         for k in range(0, len(tracks_names)):
             self.track_list.append(tracks_names[k])
             print(f"In album adding: {tracks_names[k]}")
 
-    def remove_song_in_album(self, tracks_names: []):
+    def remove_song_in_album(self, tracks_names: str):
         for k in range(0, len(tracks_names)):
             self.track_list.remove(tracks_names[k])
             print(f"In album remove: {tracks_names[k]}")
@@ -126,8 +126,12 @@ class Program:
 
         print("\n ---Task_4---")
         album1 = MusicAlbum("NEWLIGHTCHILD", "NIGHT FOR EVER", "electro rok", [])
-        album1.add_songs_in_album(["GESHTALT", "VIP", "VOYY NA LUNU", "AMORE", "MONEY DANCE"])
-        album1.remove_song_in_album(["AMORE", "MONEY DANCE"])
+
+        album1.add_songs_in_album("GESHTALT")
+        album1.add_songs_in_album("AMORE")
+        album1.add_songs_in_album("VIP")
+
+        album1.remove_song_in_album("AMORE")
         album1.play_song_in_album("AMORE")
         album1.play_song_in_album("VIP")
         album1.print_data()
