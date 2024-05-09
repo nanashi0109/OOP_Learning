@@ -1,6 +1,5 @@
 from datetime import date, time
-from math import sqrt
-from math import pi
+from math import sqrt, pi
 
 
 # Task 1
@@ -31,6 +30,80 @@ class TouristSpot:
 
     def __str__(self):
         return f"{self.name_place} \n{self.country} \n{self.type}"
+
+
+# Task 3
+class ModelWindow:
+    def __init__(self, header: str,
+                 coordinates_x: int,
+                 coordinates_y: int,
+                 height: int,
+                 width: int,
+                 color: str,
+                 is_visible: bool,
+                 with_frame: bool):
+        self.header = header
+        self.coordinates_x = coordinates_x
+        self.coordinates_y = coordinates_y
+        self.height = height
+        self.width = width
+        self.color = color
+        self.is_visible = is_visible
+        self.with_frame = with_frame
+
+    def moving(self, number_horizontal: int, number_vertical: int, width_screen=1960, height_screen=1080):
+        if self.coordinates_x + number_horizontal > width_screen or self.coordinates_x + number_horizontal < 0:
+            print("Crosses the border! Try other value")
+        else:
+            self.coordinates_x += number_horizontal
+            print(f"New coordinates x: {self.coordinates_x}")
+
+        if self.coordinates_y + number_vertical > height_screen or self.coordinates_y + number_vertical < 0:
+            print("Crosses the border! Try other value")
+        else:
+            self.coordinates_y += number_vertical
+            print(f"New coordinates y: {self.coordinates_y}")
+
+    def change_width(self, number_px, width_screen=1960):
+        if self.width + number_px > width_screen or self.width + number_px <= 0:
+            print("Incorrect number! Try other number")
+        else:
+            self.width += number_px
+            print(f"New width: {self.width}")
+
+    def change_height(self, number_px, height_screen=1080):
+        if self.height + number_px > height_screen or self.height + number_px <= 0:
+            print("Incorrect number! Try other number")
+        else:
+            self.height += number_px
+            print(f"New height: {self.height}")
+
+    def change_color(self, new_color: str):
+        self.color = new_color
+        print(f"New color: {self.color}")
+
+    def change_visibility(self):
+        self.is_visible = not self.is_visible
+        print(f"Current visibility: {self.is_visible}")
+
+    def change_state_frame(self):
+        self.with_frame = not self.with_frame
+        print(f"Current with frame: {self.with_frame}")
+
+    def display_status(self):
+        print(f"Visibility: {self.is_visible}")
+        print(f"With frame: {self.with_frame}")
+
+    def __str__(self):
+
+        return (f"\nHeader: {self.header} \n"
+                f"coordinates x: {self.coordinates_x} \n"
+                f"coordinates y: {self.coordinates_y} \n"
+                f"height: {self.height} \n"
+                f"width{self.width} \n"
+                f"color: {self.color} \n"
+                f"Is visible: {self.is_visible} \n"
+                f"with frame: {self.with_frame}")
 
 
 # Task 4
@@ -220,6 +293,17 @@ class Program:
 
         tourist_spot.visit_landmark(patient.first_name + " " + patient.last_name)
         print(tourist_spot)
+
+        print("\n---Task_3---")
+        window_1 = ModelWindow("Window 1", 250, 900, 540, 980, "Red", True, False)
+
+        window_1.change_color("Orange")
+        window_1.moving(100, 120)
+        window_1.change_state_frame()
+        window_1.change_state_frame()
+        window_1.change_visibility()
+        window_1.display_status()
+        print(window_1)
 
         print("\n---Task_4---")
         array = [1, 5, 2, 76, 17, 251]
