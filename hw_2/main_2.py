@@ -100,7 +100,7 @@ class ModelWindow:
                 f"coordinates x: {self.coordinates_x} \n"
                 f"coordinates y: {self.coordinates_y} \n"
                 f"height: {self.height} \n"
-                f"width{self.width} \n"
+                f"width: {self.width} \n"
                 f"color: {self.color} \n"
                 f"Is visible: {self.is_visible} \n"
                 f"with frame: {self.with_frame}")
@@ -199,7 +199,7 @@ class Vector:
         return Vector(new_x, new_y, new_z)
 
     def __mul__(self, other):
-        if type(other) is int:
+        if type(other) is int or type(other) is float:
             new_x = self.x * other
             new_y = self.y * other
             new_z = self.z * other
@@ -225,8 +225,13 @@ class Vector:
 class Fraction:
     def __init__(self, numerator: int, denominator: int):
         self.numerator = numerator
-        if denominator != 0:
-            self.denominator = denominator
+        self.denominator = denominator
+
+        self.check_denominator()
+
+    def check_denominator(self):
+        if self.denominator == 0:
+            print("Denominator equal zero! Please, try other values.")
 
     def __add__(self, other):
         new_denominator = self.denominator * other.denominator
@@ -308,36 +313,36 @@ class Program:
         print("\n---Task_4---")
         array = [1, 5, 2, 76, 17, 251]
 
-        print(ArrayUtils.sum(array))
-        print(ArrayUtils.multy(array))
-        print(ArrayUtils.inversion(array))
-        print(ArrayUtils.max_number(array))
-        print(ArrayUtils.min_number(array))
+        print(f"sum element array: {ArrayUtils.sum(array)}")
+        print(f"multy element array: {ArrayUtils.multy(array)}")
+        print(f"inversion array: {ArrayUtils.inversion(array)}")
+        print(f"max element in array: {ArrayUtils.max_number(array)}")
+        print(f"min element in array: {ArrayUtils.min_number(array)}")
 
         print("\n---Task_5---")
         vec1 = Vector(1, 2, 5)
         vec2 = Vector(2, 3, 7)
 
-        print(vec1 + vec2)
-        print(vec1 - vec2)
-        print(vec1 * vec2)
-        print(vec1 * 3)
+        print(f"Sum vectors: {vec1 + vec2}")
+        print(f"Sub vectors: {vec1 - vec2}")
+        print(f"Multy vectors: {vec1 * vec2}")
+        print(f"Scalar multy vector: {vec1 * 3}")
         vec1.length()
 
         print("\n---Task_6---")
         frac_1 = Fraction(2, 1)
         frac_2 = Fraction(3, 1)
 
-        print(frac_1 + frac_2)
-        print(frac_1 - frac_2)
-        print(frac_1 * frac_2)
+        print(f"Sum fractions: {frac_1 + frac_2}")
+        print(f"Sub fractions: {frac_1 - frac_2}")
+        print(f"Multy fractions: {frac_1 * frac_2}")
 
         print("\n---Task_7---")
-        print(GeometryUtils.area_circle(5))
-        print(GeometryUtils.perimeter_circle(5))
-        print(GeometryUtils.area_rectangle(5, 10))
-        print(GeometryUtils.perimeter_rectangle(5, 10))
-        print(GeometryUtils.area_triangle(5, 3, 4))
+        print(f"area circle with radius = 5: {GeometryUtils.area_circle(5)}")
+        print(f"perimetr circle with radius = 5: { GeometryUtils.perimeter_circle(5)}")
+        print(f"area rectangle with width = 5 and height = 10: {GeometryUtils.area_rectangle(5, 10)}")
+        print(f"perimetr rectangle with width = 5 and height = 10: {GeometryUtils.perimeter_rectangle(5, 10)}")
+        print(f"area triangle with sides (5, 3, 4): {GeometryUtils.area_triangle(5, 3, 4)}")
 
 
 Program.main()
