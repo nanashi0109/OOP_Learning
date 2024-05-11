@@ -284,6 +284,74 @@ class GeometryUtils:
         return sqrt(p*(p-first_side)*(p-second_side)*(p-third_side))
 
 
+# Task 8
+class Time:
+    def __init__(self, hours: int, minutes: int, seconds: int):
+        self.hours = hours
+        self.minutes = minutes
+        self.seconds = seconds
+
+    def __add__(self, other):
+        new_hours = self.hours + other.hours
+        new_minutes = self.minutes + other.minutes
+        new_seconds = self.seconds + other.seconds
+        new_time = Time(new_hours, new_minutes, new_seconds)
+        self.time_correction(new_time)
+        return new_time
+
+    def __sub__(self, other):
+        new_hours = self.hours - other.hours
+        new_minutes = self.minutes - other.minutes
+        new_seconds = self.seconds - other.seconds
+        new_time = Time(new_hours, new_minutes, new_seconds)
+        self.time_correction(new_time)
+        return new_time
+
+    def __mul__(self, other):
+        new_hours = self.hours * other
+        new_minutes = self.minutes * other
+        new_seconds = self.seconds * other
+        new_time = Time(new_hours, new_minutes, new_seconds)
+        self.time_correction(new_time)
+        return new_time
+
+    @staticmethod
+    def time_correction(new_time):
+        while new_time.seconds >= 60:
+            new_time.seconds -= 60
+            new_time.minutes += 1
+
+        while new_time.minutes >= 60:
+            new_time.minutes -= 60
+            new_time.hours += 1
+
+        while new_time.minutes < 0:
+            new_time.hours -= 1
+            new_time.minutes += 60
+
+        while new_time.seconds < 0:
+            new_time.minutes -= 1
+            new_time.seconds += 60
+
+    def __str__(self):
+        if self.hours < 10:
+            hours = f"0{self.hours}"
+        else:
+            hours = self.hours
+
+        if self.minutes < 10:
+            minutes = f"0{self.minutes}"
+        else:
+            minutes = self.minutes
+
+        if self.seconds < 10:
+            seconds = f"0{self.seconds}"
+        else:
+            seconds = self.seconds
+
+        return f"{hours}:{minutes}:{seconds}"
+
+
 class Program:
     @staticmethod
     def main():
@@ -339,10 +407,17 @@ class Program:
 
         print("\n---Task_7---")
         print(f"area circle with radius = 5: {GeometryUtils.area_circle(5)}")
-        print(f"perimetr circle with radius = 5: { GeometryUtils.perimeter_circle(5)}")
+        print(f"perimetr circle with radius = 5: {GeometryUtils.perimeter_circle(5)}")
         print(f"area rectangle with width = 5 and height = 10: {GeometryUtils.area_rectangle(5, 10)}")
         print(f"perimetr rectangle with width = 5 and height = 10: {GeometryUtils.perimeter_rectangle(5, 10)}")
         print(f"area triangle with sides (5, 3, 4): {GeometryUtils.area_triangle(5, 3, 4)}")
+
+        print("\n---Task_8---")
+        time_1 = Time(3, 45, 30)
+        time_2 = Time(4, 30, 45)
+        print(time_1 + time_2)
+        print(time_2 - time_1)
+        print(time_1 * 2)
 
 
 Program.main()
