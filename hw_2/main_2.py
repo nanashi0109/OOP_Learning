@@ -417,7 +417,7 @@ class Program:
         time_2 = Time(4, 30, 45)
         print(time_1 + time_2)
         print(time_2 - time_1)
-        print(time_1 * 2)
+        print(time_1 * 2) 
 
 
 Program.main()
