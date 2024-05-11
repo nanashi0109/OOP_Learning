@@ -296,7 +296,7 @@ class Time:
         new_minutes = self.minutes + other.minutes
         new_seconds = self.seconds + other.seconds
         new_time = Time(new_hours, new_minutes, new_seconds)
-        self.time_correction(new_time)
+        new_time.time_correction()
         return new_time
 
     def __sub__(self, other):
@@ -304,7 +304,7 @@ class Time:
         new_minutes = self.minutes - other.minutes
         new_seconds = self.seconds - other.seconds
         new_time = Time(new_hours, new_minutes, new_seconds)
-        self.time_correction(new_time)
+        new_time.time_correction()
         return new_time
 
     def __mul__(self, other):
@@ -312,26 +312,25 @@ class Time:
         new_minutes = self.minutes * other
         new_seconds = self.seconds * other
         new_time = Time(new_hours, new_minutes, new_seconds)
-        self.time_correction(new_time)
+        new_time.time_correction()
         return new_time
 
-    @staticmethod
-    def time_correction(new_time):
-        while new_time.seconds >= 60:
-            new_time.seconds -= 60
-            new_time.minutes += 1
+    def time_correction(self):
+        while self.seconds >= 60:
+            self.seconds -= 60
+            self.minutes += 1
 
-        while new_time.minutes >= 60:
-            new_time.minutes -= 60
-            new_time.hours += 1
+        while self.minutes >= 60:
+            self.minutes -= 60
+            self.hours += 1
 
-        while new_time.minutes < 0:
-            new_time.hours -= 1
-            new_time.minutes += 60
+        while self.minutes < 0:
+            self.hours -= 1
+            self.minutes += 60
 
-        while new_time.seconds < 0:
-            new_time.minutes -= 1
-            new_time.seconds += 60
+        while self.seconds < 0:
+            self.minutes -= 1
+            self.seconds += 60
 
     def __str__(self):
         if self.hours < 10:
@@ -417,7 +416,7 @@ class Program:
         time_2 = Time(4, 30, 45)
         print(time_1 + time_2)
         print(time_2 - time_1)
-        print(time_1 * 2) 
+        print(time_1 * 2)
 
 
 Program.main()
