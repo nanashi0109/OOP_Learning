@@ -64,35 +64,32 @@ class ModelWindow:
             self.coordinates_y += number_vertical
             print(f"New coordinates y: {self.coordinates_y}")
 
-    def change_width(self, number_px, width_screen=1960):
-        if self.width + number_px > width_screen or self.width + number_px <= 0:
-            print("Incorrect number! Try other number")
+    def change_scale(self, new_width: int, new_height: int, width_screen=1960, height_screen=1080):
+        if 0 > new_width > width_screen or 0 > new_height > height_screen:
+            print("Incorrect numbers! Try others numbers")
         else:
-            self.width += number_px
+            self.width = new_width
+            self.height = new_height
             print(f"New width: {self.width}")
-
-    def change_height(self, number_px, height_screen=1080):
-        if self.height + number_px > height_screen or self.height + number_px <= 0:
-            print("Incorrect number! Try other number")
-        else:
-            self.height += number_px
             print(f"New height: {self.height}")
 
     def change_color(self, new_color: str):
         self.color = new_color
         print(f"New color: {self.color}")
 
-    def change_visibility(self):
-        self.is_visible = not self.is_visible
+    def change_visibility(self, value: bool):
+        self.is_visible = value
         print(f"Current visibility: {self.is_visible}")
 
-    def change_state_frame(self):
-        self.with_frame = not self.with_frame
+    def change_state_frame(self, value: bool):
+        self.with_frame = value
         print(f"Current with frame: {self.with_frame}")
 
-    def display_status(self):
-        print(f"Visibility: {self.is_visible}")
-        print(f"With frame: {self.with_frame}")
+    def is_visibility(self):
+        return self.is_visible
+
+    def is_with_frame(self):
+        return self.with_frame
 
     def __str__(self):
 
@@ -371,10 +368,10 @@ class Program:
 
         window_1.change_color("Orange")
         window_1.moving(100, 120)
-        window_1.change_state_frame()
-        window_1.change_state_frame()
-        window_1.change_visibility()
-        window_1.display_status()
+        window_1.change_state_frame(False)
+        window_1.change_visibility(True)
+        window_1.is_visibility()
+        window_1.is_with_frame()
         print(window_1)
 
         print("\n---Task_4---")
