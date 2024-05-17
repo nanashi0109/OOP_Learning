@@ -12,7 +12,7 @@ class Library:
         if not isinstance(book, Book):
             raise TypeError("Book must be of type Book")
 
-        if self.book_list.count(book) == 0:
+        if book not in self.book_list:
             self.book_list.append(book)
             book.set_stock(True)
             print(f"In library add book {book.name}")
@@ -21,7 +21,7 @@ class Library:
         if not isinstance(book, Book):
             raise TypeError("Book must be of type Book")
 
-        if self.book_list.count(book) > 0:
+        if book in self.book_list:
             self.book_list.remove(book)
             book.set_stock(False)
             print(f"In library remove book {book.name}")
@@ -30,7 +30,7 @@ class Library:
         if not isinstance(user, User):
             raise TypeError("User must be User")
 
-        if self.user_list.count(user) == 0:
+        if user not in self.user_list:
             self.user_list.append(user)
             self.count_register_user += 1
             user.set_number_library_card(self.count_register_user)
@@ -40,7 +40,7 @@ class Library:
         if not isinstance(book, Book) or not isinstance(user, User):
             raise TypeError("User must be User/Book must be Book")
 
-        if self.book_list.count(book) == 0 or (not book.is_stock):
+        if book not in self.book_list or (not book.is_stock):
             print(f"Book {book.name} is not in library")
             return
 
@@ -53,7 +53,7 @@ class Library:
         if not isinstance(book, Book) or not isinstance(user, User):
             raise TypeError("User must be User/Book must be Book")
 
-        if self.book_list.count(book) == 0:
+        if book not in self.book_list:
             self.add_book(book)
 
         book.set_stock(True)
@@ -109,8 +109,8 @@ class Book:
 
     def __str__(self):
         result = (f"Name: {self.name}, author: {self.author}, "
-                f"year_release: {self.year_release}, genre: {self.genre}, "
-                f"current_user: ")
+                  f"year_release: {self.year_release}, genre: {self.genre}, "
+                  f"current_user: ")
 
         if isinstance(self.current_user, User):
             result += f"{self.current_user.name}"
@@ -161,8 +161,8 @@ class Program:
     def main():
         user_1 = User("Stas", 1231, [])
         library_1 = Library("Kray", "SSSSSSssSSS", [], [])
-        book_1 = Book("King Arthur", "NAAANI", 0, "Action", False, None)
-        book_2 = Book("Clear code", "Robert Martin", 2022, "educational", False, None)
+        book_1 = Book("Chansaw man", "Tatsuki", 2018, "Action", False, None)
+        book_2 = Book("Clear code", "Robert Martin", 2022, "Educational", False, None)
 
         library_1.register_user(user_1)
         library_1.add_book(book_1)
