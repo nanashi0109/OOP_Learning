@@ -1,179 +1,434 @@
-class Library:
+# Task 1.2
 
-    count_register_user = 0
+class Spell:
+    def __init__(self, name: str, difficulty_level: float,
+                 type: str, description: str) -> None:
+        self.__name = name
+        self.__difficulty_level = difficulty_level
+        self.__type = type
+        self.__description = description
 
-    def __init__(self, name: str, address: str, book_list: list, user_list: list):
-        self.name = name
-        self.address = address
-        self.book_list = book_list
-        self.user_list = user_list
+    def get_name(self) -> str:
+        return self.__name
 
-    def add_book(self, book: "Book"):
-        if not isinstance(book, Book):
-            raise TypeError("Book must be of type Book")
+    def get_difficulty_level(self) -> float:
+        return self.__difficulty_level
 
-        if book not in self.book_list:
-            self.book_list.append(book)
-            book.set_stock(True)
-            print(f"In library add book {book.name}")
+    def get_type(self) -> str:
+        return self.__type
 
-    def remove_book(self, book: "Book"):
-        if not isinstance(book, Book):
-            raise TypeError("Book must be of type Book")
+    def get_description(self) -> str:
+        return self.__description
 
-        if book in self.book_list:
-            self.book_list.remove(book)
-            book.set_stock(False)
-            print(f"In library remove book {book.name}")
+    def set_name(self, name: str) -> None:
+        if not isinstance(name, str):
+            raise TypeError("Value must be type str")
 
-    def register_user(self, user: "User"):
-        if not isinstance(user, User):
-            raise TypeError("User must be User")
+        self.__name = name
 
-        if user not in self.user_list:
-            self.user_list.append(user)
-            self.count_register_user += 1
-            user.set_number_library_card(self.count_register_user)
-            print(f"Register user {user.name} by number {self.count_register_user}")
+    def set_difficulty_level(self, difficulty_level: float) -> None:
+        if not isinstance(difficulty_level, float):
+            raise TypeError("Value must be type float")
 
-    def issue_book(self, book: "Book", user: "User"):
-        if not isinstance(book, Book) or not isinstance(user, User):
-            raise TypeError("User must be User/Book must be Book")
+        self.__difficulty_level = difficulty_level
 
-        if book not in self.book_list or (not book.is_stock):
-            print(f"Book {book.name} is not in library")
-            return
+    def set_type(self, type: str) -> None:
+        if not isinstance(type, str):
+            raise TypeError("Value must be type str")
 
-        book.set_stock(False)
-        book.set_user(user)
-        user.take_book(book)
-        print(f"User {user.name} take book {book.name}")
+        self.__type = type
 
-    def return_book(self, book: "Book", user: "User"):
-        if not isinstance(book, Book) or not isinstance(user, User):
-            raise TypeError("User must be User/Book must be Book")
+    def set_description(self, description: str) -> None:
+        if not isinstance(description, str):
+            raise TypeError("Value must be type str")
 
-        if book not in self.book_list:
-            self.add_book(book)
+        self.__description = description
 
-        book.set_stock(True)
-        book.set_user(None)
-        user.remove_book(book)
-        print(f"User {user.name} returned book {book.name}")
+    def __str__(self) -> str:
+        return (f"name: {self.__name}\n"
+                f"difficulty_level: {self.__difficulty_level}\n"
+                f"type: {self.__type}\n"
+                f"description: {self.__description}")
 
-    def get_book_status(self) -> str:
-        result = "Book status: \n"
-        for book in self.book_list:
-            result += f"{book} \n"
 
-        return result
+# Task 1.1
+class Wizard:
+    def __init__(self, name: str, faculty: str,
+                 level_magical_power: float,
+                 known_spells: [Spell],
+                 is_released: bool):
+        self.__name = name
+        self.__faculty = faculty
+        self.__level_magical_power = level_magical_power
+        self.__known_spells = known_spells
+        self.__is_released = is_released
 
-    def get_user_status(self) -> str:
-        result = "User status: \n"
-        for user in self.user_list:
-            result += f"{user} \n"
+    def get_name(self) -> str:
+        return self.__name
 
-        return result
+    def get_faculty(self) -> str:
+        return self.__faculty
+
+    def get_level_magical_power(self) -> float:
+        return self.__level_magical_power
+
+    def get_spells(self) -> [Spell]:
+        return self.__known_spells
+
+    def is_released(self) -> bool:
+        return self.__is_released
+
+    def set_faculty(self, faculty: str) -> None:
+        if not isinstance(faculty, str):
+            raise TypeError("value must be string")
+
+        self.__faculty = faculty
+
+    def set_magic_level(self, level_magical_power: float) -> None:
+        if not isinstance(level_magical_power, float):
+            raise TypeError("value must be type float ")
+
+        self.__level_magical_power = level_magical_power
+
+    def set_released(self, is_released: bool) -> None:
+        if not isinstance(is_released, bool):
+            raise TypeError("value must be type bool")
+        self.__is_released = is_released
+
+    def add_spell(self, spell: Spell) -> None:
+        if not isinstance(spell, Spell):
+            raise TypeError("value must be type Spell")
+        if spell not in self.__known_spells:
+            self.__known_spells.append(spell)
+
+    def remove_spell(self, spell: Spell) -> None:
+        if not isinstance(spell, Spell):
+            raise TypeError("value must be type Spell")
+
+        if spell in self.__known_spells:
+            self.__known_spells.remove(spell)
+
+    def increase_magical_level(self, amount: float) -> None:
+        if not isinstance(amount, float):
+            raise TypeError("value must be type float")
+
+        self.__level_magical_power += amount
+
+    def decrease_magical_level(self, amount: float) -> None:
+        if not isinstance(amount, float):
+            raise TypeError("value must be type float")
+
+        self.__level_magical_power -= amount
+
+    def __str__(self) -> str:
+        result = ""
+        for spell in self.__known_spells:
+            result += str(spell) + ", \n"
+
+        return (f"name: {self.__name} \n"
+                f"faculty: {self.__faculty}\n"
+                f"level: {self.__level_magical_power}\n"
+                f"is_released: {self.__is_released}\n"
+                f"Spells: {result}")
+
+
+# Task 2
+class Project:
+    def __init__(self, name: str):
+        self.__name = name
+
+    def get_name(self) -> str:
+        return self.__name
+
+    def __str__(self) -> str:
+        return self.__name
+
+
+class Employee:
+    def __init__(self, name: str, post: str, department: str, salary: float,
+                 work_experience: int, completed_projects: [Project]) -> None:
+        self.__name = name
+        self.__post = post
+        self.__department = department
+        self.__salary = salary
+        self.__work_experience = work_experience
+        self.__completed_projects = completed_projects
+
+    def get_name(self) -> str:
+        return self.__name
+
+    def get_post(self) -> str:
+        return self.__post
+
+    def get_department(self) -> str:
+        return self.__department
+
+    def get_salary(self) -> float:
+        return self.__salary
+
+    def get_work_experience(self) -> float:
+        return self.__work_experience
+
+    def get_completed_projects(self) -> [Project]:
+        return self.__completed_projects
+
+    def set_name(self, name: str) -> None:
+        if not isinstance(name, str):
+            raise TypeError("Value must be type str")
+
+        self.__name = name
+
+    def set_post(self, post: str) -> None:
+        if not isinstance(post, str):
+            raise TypeError("Value must be type str")
+
+        self.__post = post
+
+    def set_department(self, department: str) -> None:
+        if not isinstance(department, str):
+            raise TypeError("Value must be type str")
+
+        self.__department = department
+
+    def set_salary(self, salary: float) -> None:
+        if not isinstance(salary, float):
+            raise TypeError("Value must be type float")
+
+        self.__salary = salary
+
+    def set_work_experience(self, work_experience: int) -> None:
+        if not isinstance(work_experience, int):
+            raise TypeError("Value must be type int")
+
+        self.__work_experience = work_experience
+
+    def set_completed_projects(self, completed_projects: [Project]) -> None:
+        self.__completed_projects = completed_projects
+
+    def add_completed_project(self, project: Project) -> None:
+        if not isinstance(project, Project):
+            raise TypeError("value must be type Project")
+
+        if project not in self.__completed_projects:
+            self.__completed_projects.append(project)
+
+    def remove_completed_project(self, project: Project) -> None:
+        if not isinstance(project, Project):
+            raise TypeError("value must be type Project")
+
+        if project in self.__completed_projects:
+            self.__completed_projects.remove(project)
+
+    def increase_salary(self, amount: float) -> None:
+        if not isinstance(amount, float):
+            raise TypeError("value must be type float")
+
+        self.__salary += amount
+
+    def __str__(self) -> str:
+        result = ""
+        for project in self.__completed_projects:
+            result += str(project) + ", "
+
+        return (f"name: {self.__name} \n"
+                f"post: {self.__post} \n"
+                f"department: {self.__department} \n"
+                f"salary: {self.__salary} \n"
+                f"work_experience: {self.__work_experience} \n"
+                f"completed_projects: {result}")
+
+
+# Task 3
+class Robot:
+    def __init__(self, serial_number: str, model: str,
+                 current_task, battery: float, is_working) -> None:
+        self.__serial_number = serial_number
+        self.__model = model
+        self.__current_task = current_task
+        self.__battery = battery
+        self.__is_working = is_working
+
+    def turn_on(self):
+        self.__is_working = True
+
+    def turn_off(self):
+        self.__is_working = False
+
+    def get_serial_number(self) -> str:
+        return self.__serial_number
+
+    def get_model(self) -> str:
+        return self.__model
+
+    def get_current_task(self) -> str:
+        return self.__current_task
+
+    def get_battery(self) -> float:
+        return self.__battery
+
+    def is_working(self) -> bool:
+        return self.__is_working
+
+    def set_serial_number(self, name: str) -> None:
+        if not isinstance(name, str):
+            raise TypeError("value must be type str")
+
+        self.__serial_number = name
+
+    def set_model(self, model: str) -> None:
+        if not isinstance(model, str):
+            raise TypeError("value must be type str")
+
+        self.__model = model
+
+    def set_task(self, task: str) -> None:
+        if not isinstance(task, str):
+            raise TypeError("value must be type str")
+
+        self.__current_task = task
+
+    def set_battery(self, battery: float) -> None:
+        if not isinstance(battery, float):
+            raise TypeError("value must be type float")
+
+        self.__battery = battery
+
+    def set_working(self, is_working: bool) -> None:
+        if not isinstance(is_working, bool):
+            raise TypeError("value must be type bool")
+
+        self.__is_working = is_working
+
+    def __str__(self) -> str:
+        return (f"serial_number: {self.__serial_number} \n"
+                f"model: {self.__model} \n"
+                f"current_task: {self.__current_task} \n"
+                f"battery: {self.__battery} \n"
+                f"is working: {self.__is_working}")
+
+
+# Task 4
+class Achievement:
+    def __init__(self, name: str):
+        self.__name = name
+
+    def get_name(self) -> str:
+        return self.__name
 
     def __str__(self):
-        return f"Name: {self.name}\nAddress: {self.address}, Book List: {self.book_list}, User list: {self.user_list}\n"
+        return self.__name
 
 
-class Book:
-    def __init__(self, name: str, author: str, year_release: int, genre: str, is_stock: bool, current_user):
-        self.name = name
-        self.author = author
-        self.year_release = year_release
-        self.genre = genre
-        self.is_stock = is_stock
-        self.current_user = current_user
+class Athlete:
+    def __init__(self, name: str, age: int, sport_type: str,
+                 achievements: [Achievement], is_functional: bool) -> None:
+        self.__name = name
+        self.__age = age
+        self.__sport_type = sport_type
+        self.__achievements = achievements
+        self.__is_functional = is_functional
 
-    def set_stock(self, is_stock: bool):
-        if not isinstance(is_stock, bool):
-            raise TypeError("is_stock must be bool")
+    def add_achievement(self, achievement: Achievement) -> None:
+        if not isinstance(achievement, Achievement):
+            raise TypeError("value must be type Achievement")
 
-        self.is_stock = is_stock
+        if achievement not in self.__achievements:
+            self.__achievements.append(achievement)
 
-    def set_user(self, user: "User"):
-        if isinstance(user, User) or isinstance(user, type(None)):
-            self.current_user = user
+    def remove_achievement(self, achievement: Achievement) -> None:
+        if not isinstance(achievement, Achievement):
+            raise TypeError("value must be type Achievement")
 
-    def set_genre(self, new_genre: str):
-        if not isinstance(new_genre, str):
-            raise TypeError("new_genre must be str")
+        if achievement in self.__achievements:
+            self.__achievements.remove(achievement)
 
-        self.genre = new_genre
+    def get_name(self) -> str:
+        return self.__name
 
-    def is_stock_in_library(self):
-        return self.is_stock
+    def get_age(self) -> int:
+        return self.__age
 
-    def __str__(self):
-        result = (f"Name: {self.name}, author: {self.author}, "
-                  f"year_release: {self.year_release}, genre: {self.genre}, "
-                  f"current_user: ")
+    def get_sport_type(self) -> str:
+        return self.__sport_type
 
-        if isinstance(self.current_user, User):
-            result += f"{self.current_user.name}"
-        else:
-            result += f"{self.current_user}"
+    def get_achievements(self) -> [Achievement]:
+        return self.__achievements
 
-        return result
+    def is_functional(self) -> bool:
+        return self.__is_functional
 
+    def set_name(self, name: str) -> None:
+        if not isinstance(name, str):
+            raise TypeError("value must be type str")
 
-class User:
-    def __init__(self, name: str, number_library_card: int, taken_books: list):
-        self.name = name
-        self.number_library_card = number_library_card
-        self.taken_books = taken_books
+        self.__name = name
 
-    def take_book(self, book: Book):
-        if not isinstance(book, Book):
-            raise TypeError("Book must be of type Book")
+    def set_age(self, age: int) -> None:
+        if not isinstance(age, int):
+            raise TypeError("value must be type int")
 
-        self.taken_books.append(book)
+        self.__age = age
 
-    def remove_book(self, book: Book):
-        if not isinstance(book, Book):
-            raise TypeError("Book must be of type Book")
+    def set_sport_type(self, sport_type: str) -> None:
+        if not isinstance(sport_type, str):
+            raise TypeError("value must be type str")
 
-        if self.taken_books.count(book) > 0:
-            self.taken_books.remove(book)
+        self.__sport_type = sport_type
 
-    def get_taken_books(self):
-        return self.taken_books
+    def set_achievements(self, achievements: [Achievement]) -> None:
+        self.__achievements = achievements
 
-    def set_number_library_card(self, new_number_library_card: int):
-        if not isinstance(new_number_library_card, int):
-            raise TypeError("new_number_library_card must be int")
+    def set_is_functional(self, is_functional: bool) -> None:
+        if not isinstance(is_functional, bool):
+            raise TypeError("value must be type bool")
 
-        self.number_library_card = new_number_library_card
+        self.__is_functional = is_functional
 
-    def __str__(self):
-        result = f"name: {self.name}, number_library_card: {self.number_library_card}, books: "
-        for book in self.taken_books:
-            result += f"{book.name} "
+    def __str__(self) -> str:
+        result = ""
+        for achievement in self.__achievements:
+            result += str(achievement) + ", "
 
-        return result
+        return (f"name: {self.__name} \n"
+                f"age: {self.__age} \n"
+                f"sport_type: {self.__sport_type} \n"
+                f"achievements: {result} \n"
+                f"is functional: {self.__is_functional}")
 
 
 class Program:
     @staticmethod
     def main():
-        user_1 = User("Stas", 1231, [])
-        library_1 = Library("Kray", "SSSSSSssSSS", [], [])
-        book_1 = Book("Chansaw man", "Tatsuki", 2018, "Action", False, None)
-        book_2 = Book("Clear code", "Robert Martin", 2022, "Educational", False, None)
+        print("---Task_1---")
+        spell_1 = Spell("first", 12, "Attack", "Some description")
+        spell_2 = Spell("second", 25, "Heal", "More description")
 
-        library_1.register_user(user_1)
-        library_1.add_book(book_1)
-        library_1.add_book(book_2)
+        wizard_1 = Wizard("first", "Slytherin", 234, [spell_1], False)
 
-        library_1.issue_book(book_1, user_1)
-        library_1.issue_book(book_2, user_1)
-        print(library_1.get_book_status())
-        print(library_1.get_user_status())
-        library_1.return_book(book_1, user_1)
-        print(library_1.get_book_status())
+        wizard_1.add_spell(spell_2)
+        wizard_1.add_spell(spell_1)
+
+        wizard_1.is_released()
+        print(wizard_1)
+        print(spell_1)
+
+        print("\n---Task_2---")
+        project_1 = Project("first project")
+        project_2 = Project("second project")
+
+        emp_1 = Employee("first", "Manager", "main", 50500, 5, [project_1, project_2])
+        emp_1.add_completed_project(project_2)
+        print(emp_1)
+
+        print("\n---Task_3---")
+        robot_1 = Robot("02515FaT", "Killer", "Clear office", 48, True)
+        robot_1.set_task("Kill boss")
+        print(robot_1)
+
+        print("\n---Task_4---")
+        athlete = Athlete("Athlete name", 53, "Powerlifting", [Achievement("some achievement")], True)
+        athlete.add_achievement(Achievement("second achievement"))
+        print(athlete)
 
 
 Program.main()
