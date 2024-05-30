@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 
-# region Task_1
 class Student:
     def __init__(self, first_name: str, last_name: str, age: int, average_score: float):
         self.__first_name = first_name
@@ -33,7 +32,6 @@ class Student:
             raise TypeError('Value must be string.')
 
         self.__last_name = last_name
-
 
     def set_age(self, age: int) -> None:
         if not isinstance(age, str):
@@ -72,8 +70,6 @@ class Student:
 
     def __ge__(self, other: Student) -> bool:
         return True if self.__average_score >= other.__average_score else False
-
-# endregion
 
 
 class Program:
