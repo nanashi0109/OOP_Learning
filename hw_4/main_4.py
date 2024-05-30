@@ -1,6 +1,10 @@
 from __future__ import annotations
 
 
+<<<<<<< HEAD
+=======
+# region Task_1
+>>>>>>> e060be6c76d8c2dbb6024eecff6edb4231af023a
 class Student:
     def __init__(self, first_name: str, last_name: str, age: int, average_score: float):
         self.__first_name = first_name
@@ -33,6 +37,10 @@ class Student:
 
         self.__last_name = last_name
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> e060be6c76d8c2dbb6024eecff6edb4231af023a
     def set_age(self, age: int) -> None:
         if not isinstance(age, str):
             raise TypeError('Value must be int.')
@@ -71,6 +79,11 @@ class Student:
     def __ge__(self, other: Student) -> bool:
         return True if self.__average_score >= other.__average_score else False
 
+<<<<<<< HEAD
+=======
+# endregion
+
+>>>>>>> e060be6c76d8c2dbb6024eecff6edb4231af023a
 
 class Program:
     @staticmethod
