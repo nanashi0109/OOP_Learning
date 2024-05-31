@@ -8,6 +8,7 @@ class Library:
         self.__employees = employees
         self.__books = books
 
+    # region Getters && Setters
     def get_name(self) -> str:
         return self.__name
 
@@ -43,6 +44,7 @@ class Library:
             raise TypeError('Value must be Book.')
 
         self.__books = books
+    # endregion
 
     def add_book(self, book: Book) -> None:
         if not isinstance(book, Book):
@@ -87,6 +89,7 @@ class Book:
         self.__id = id
         self.__genres = genres
 
+    # region Getters && Setters
     def get_title(self) -> str:
         return self.__title
 
@@ -131,6 +134,7 @@ class Book:
             raise TypeError('Value must be list.')
 
         self.__genres = genres
+    # endregion
 
     def add_genre(self, genre: Genre) -> None:
         if not isinstance(genre, list):
@@ -159,6 +163,7 @@ class Genre:
         self.__name = name
         self.__description = description
 
+    # region Getters && Setters
     def get_name(self) -> str:
         return self.__name
 
@@ -176,6 +181,7 @@ class Genre:
             raise TypeError('Value must be string.')
 
         self.__description = description
+    # endregion
 
     def __str__(self) -> str:
         return (f"name: {self.__name},\n"
@@ -189,6 +195,7 @@ class Employee:
         self.__id = id
         self.__contact_info = contact_info
 
+    # region Getters && Setters
     def get_name(self) -> str:
         return self.__name
 
@@ -224,6 +231,7 @@ class Employee:
             raise TypeError('Value must be list.')
 
         self.__contact_info = contact_info
+    # endregion
 
     def add_contact_info(self, contact_info: ContactInfo) -> None:
         if not isinstance(contact_info, ContactInfo):
@@ -251,6 +259,7 @@ class ContactInfo:
         self.__type_contact = type_contact
         self.__value_contact = value_contact
 
+    # region Getters && Setters
     def get_type(self) -> str:
         return self.__type_contact
 
@@ -268,7 +277,30 @@ class ContactInfo:
             raise TypeError('Value must be string.')
 
         self.__value_contact = value_contact
+    # endregion
 
     def __str__(self) -> str:
         return (f"Type: {self.__type_contact},\n"
                 f"Value: {self.__value_contact}")
+
+
+class Program:
+    @staticmethod
+    def main():
+        contact = ContactInfo("email", "someinfo@mail.com")
+
+        emp1 = Employee("First", "some post", 681262, contact)
+
+        gnr1 = Genre("First genre", "first desc")
+        gnr2 = Genre("Second genre", "second desc")
+
+        book1 = Book("First book", "some author", 1251, 1252, [gnr1])
+        book2 = Book("Second book", "some author", 1942, 2050, [gnr2])
+
+        library = Library("Libr", "Some address", [emp1], [book1])
+
+        library.add_book(book2)
+        print(library)
+
+
+Program.main()

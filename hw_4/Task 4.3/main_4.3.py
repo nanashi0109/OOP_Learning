@@ -6,6 +6,7 @@ class Car:
         self.__price = price
         self.__status = status
 
+    # region Getters && Setters
     def get_brand(self) -> str:
         return self.__brand
 
@@ -32,6 +33,7 @@ class Car:
             raise TypeError("Value must be str")
 
         self.__status = status
+    # endregion
 
     def __str__(self):
         return f"brand: {self.__brand}, model: {self.__model}"
@@ -43,6 +45,7 @@ class Salesperson:
         self.__work_experience = work_experience
         self.__cars_sold = cars_sold
 
+    # region Getters
     def get_name(self) -> str:
         return self.__name
 
@@ -51,6 +54,7 @@ class Salesperson:
 
     def get_cars_sold(self) -> [Car]:
         return self.__cars_sold
+    # endregion
 
     def add_sold_car(self, car: Car) -> None:
         if not isinstance(car, Car):
@@ -74,6 +78,7 @@ class Customer:
         self.__mail = mail
         self.__purchased_cars = purchased_cars
 
+    # region Getters
     def get_name(self) -> str:
         return self.__name
 
@@ -85,6 +90,7 @@ class Customer:
 
     def get_purchased_cars(self) -> [Car]:
         return self.__purchased_cars
+    # endregion
 
     def add_purchased_car(self, car: Car) -> None:
         if not isinstance(car, Car):
@@ -107,6 +113,7 @@ class Dealership:
         self.__customers = customers
         self.__salesperson = salesperson
 
+    # region Getters
     def get_cars(self) -> [Car]:
         return self.__cars
 
@@ -115,6 +122,7 @@ class Dealership:
 
     def get_salesperson(self) -> [Salesperson]:
         return self.__salesperson
+    # endregion
 
     def add_car(self, car: Car) -> None:
         if not isinstance(car, Car):
