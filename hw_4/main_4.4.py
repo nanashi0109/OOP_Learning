@@ -9,7 +9,7 @@ class HogwartsStudent:
         self.__mana = mana
         self.__learned_spells = learned_spells
 
-        self.__min_cost_spell = 0
+        self.__min_cost_spell = 0.0
         self.__calculate_min_cost_spell()
 
     # region Getters && Setters
@@ -71,8 +71,6 @@ class HogwartsStudent:
         return self.__mana >= self.__min_cost_spell
 
     def cast_spell(self, target: HogwartsStudent) -> None:
-        # spell_index = random.randint(0, len(self.__learned_spells) - 1)
-        # spell_for_attack = self.__learned_spells[spell_index]
         spell_for_attack = random.choice(self.__learned_spells)
 
         if self.__mana - spell_for_attack.get_mana_cost() >= 0:
